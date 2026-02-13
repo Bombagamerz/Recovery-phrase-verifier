@@ -41,18 +41,6 @@ Visit `http://localhost:3000` in your web browser.
 
 ## The Correct Recovery Words (in order)
 
-1. steel
-2. hamster
-3. casual
-4. nose
-5. raise
-6. right
-7. cherry
-8. various
-9. trick
-10. purse
-11. session
-12. bag
 
 ## Features
 
