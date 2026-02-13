@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔐 Recovery Phrase Verifier</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Theme Toggle -->
+    <div class="header">
+      <h1>🔐 Recovery Verifier</h1>
+      <button id="themeToggle" class="theme-toggle" title="Toggle dark/light mode">
+        🌙
+      </button>
+    </div>
+
+    <div class="main-content">
+      <!-- Left Panel: Verification Form -->
+      <div class="panel form-panel">
+        <h2>Enter Recovery Phrase</h2>
+        
+        <div class="input-group">
+          <label for="username">Discord Username</label>
+          <input type="text" id="username" placeholder="Enter your Discord username.." maxlength="32">
+        </div>
+
+        <div class="words-grid">
+          <h3>Enter 12 Recovery Words</h3>
+          <div id="wordsContainer" class="words-input-container"></div>
+        </div>
+
+        <button id="submitBtn" class="submit-btn">Verify Phrase</button>
+        <div id="result" class="result-display"></div>
+      </div>
+
+      <!-- Right Panel: Leaderboard -->
+      <div class="panel leaderboard-panel">
+        <h2>🏆 Leaderboard</h2>
+        <div id="leaderboard" class="leaderboard-list">
+          <div class="leaderboard-placeholder">
+            <p>Waiting for first submission...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
