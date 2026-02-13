@@ -1,6 +1,6 @@
 # 🔐 Crypto Wallet Recovery Phrase Verifier
 
-A modern, secure recovery phrase verification system with real-time leaderboard. Users verify their recovery phrase and compete on a live leaderboard.
+A modern, secure recovery phrase verification system with real-time leaderboard. Users verify their recovery phrase and compete on a live leaderboard with **persistent Supabase PostgreSQL database**.
 
 ## Features
 
@@ -8,18 +8,67 @@ A modern, secure recovery phrase verification system with real-time leaderboard.
 🏆 **Live Leaderboard** - Real-time ranking of successful submissions
 🌓 **Light/Dark Mode** - Beautiful theme toggle
 🎨 **Modern Crypto UI** - Clean, minimal, and secure-feeling design
-💾 **Discord Username** - Track submissions by Discord username
+💾 **Persistent Database** - All submissions saved to Supabase PostgreSQL (survives server restarts)
+📋 **Discord Username** - Track submissions by Discord username
 ⚡ **Real-time Updates** - Leaderboard updates every 2 seconds
+🌍 **Deploy Anywhere** - Works on serverless platforms (Vercel, Railway, etc.)
 
 ## Setup Instructions
 
-### 1. Install Dependencies
+### 1. Create Supabase Project (Free)
+
+1. Go to [supabase.com](https://supabase.com) and sign up (free)
+2. Click **"New Project"**
+3. Enter a **Project Name** (e.g., "recovery-verifier")
+4. Create a strong **Database Password**
+5. Select your **Region** (closest to you)
+6. Click **"Create new project"** (takes ~1 min)
+
+### 2. Create Database Table
+
+1. In Supabase dashboard, go to **SQL Editor**
+2. Click **"New Query"**
+3. Paste this SQL and click **"Run"**:
+
+```sql
+CREATE TABLE submissions (
+  id BIGSERIAL PRIMARY KEY,
+  username TEXT NOT NULL,
+  timestamp TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE INDEX idx_timestamp ON submissions(timestamp);
+```
+
+### 3. Get Your Credentials
+
+1. Go to **Project Settings** → **API**
+2. Copy your **Project URL** (e.g., `https://xxxxx.supabase.co`)
+3. Copy your **Anon Public Key** (under API Keys)
+
+### 4. Setup Environment Variables
+
+1. Copy `.env.example` to `.env`:
+
+```bash
+cp .env.example .env
+```
+
+2. Open `.env` and paste your credentials:
+
+```
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_KEY=your-anon-key
+```
+
+### 5. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 2. Start the Server
+### 6. Start the Server
 
 ```bash
 npm start
@@ -27,9 +76,19 @@ npm start
 
 The server will run on `http://localhost:3000`
 
-### 3. Open in Browser
+### 7. Open in Browser
 
 Visit `http://localhost:3000` in your web browser.
+
+### 8. View Leaderboard (Optional)
+
+To manually view all submissions from the database:
+
+```bash
+npm run leaderboard
+```
+
+This displays all submissions in chronological order with timestamps.
 
 ## How It Works
 
@@ -41,6 +100,15 @@ Visit `http://localhost:3000` in your web browser.
 
 ## The Correct Recovery Words (in order)
 
+
+## Database
+
+All submissions are automatically saved to **Supabase PostgreSQL**:
+
+- **Table**: `submissions` - Stores username and timestamp of each correct submission
+- **Persistence**: Data survives server restarts
+- **Cloud**: Accessible from anywhere (Vercel, Railway, etc.)
+- **Query**: Use `npm run leaderboard` to view all submissions
 
 ## Features
 
